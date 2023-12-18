@@ -1,20 +1,21 @@
 trigger:
-- main
+  - main
 
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  things.service_account_password_a: Password A
+  things.service_account_password_b: Password B
+  things.service_account_password_c: Password C
+  things.service_account_password_d: Password D
+
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  - task: FileTransform@1
+    inputs:
+      folderPath: "$(System.DefaultWorkingDirectory)"
+      fileType: "json"
+      targetFiles: "example.json"
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-- task: FileTransform@1
-  inputs:
-    folderPath: '$(System.DefaultWorkingDirectory)'
-    fileType: 'json'
-    targetFiles: 'example.json'
+  - script: cat example.json
+    displayName: "Show example.json"

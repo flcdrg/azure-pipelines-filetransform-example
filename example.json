@@ -1,0 +1,15 @@
+{
+    "stuff": {
+        "double": "j"
+    },
+    "things": {
+        "service_account_username_a": "username a",
+        "service_account_password_a": "",
+        "service_account_username_b": "username b",
+        "service_account_password_b": "",
+        "service_account_username_c": "username c",
+        "service_account_password_c": "",
+        "service_account_username_d": "username d",
+        "service_account_password_d": ""
+    }
+}
