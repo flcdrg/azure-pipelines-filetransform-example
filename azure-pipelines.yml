@@ -4,18 +4,34 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  things.service_account_password_a: Password A
-  things.service_account_password_b: Password B
-  things.service_account_password_c: Password C
-  things.service_account_password_d: Password D
+jobs:
+  - job: inline
+    variables:
+      things.service_account_password_a: Password A
+      things.service_account_password_b: Password B
+      things.service_account_password_c: Password C
+      things.service_account_password_d: Password D
 
-steps:
-  - task: FileTransform@1
-    inputs:
-      folderPath: "$(System.DefaultWorkingDirectory)"
-      fileType: "json"
-      targetFiles: "example.json"
+    steps:
+      - task: FileTransform@1
+        inputs:
+          folderPath: "$(System.DefaultWorkingDirectory)"
+          fileType: "json"
+          targetFiles: "example.json"
 
-  - script: cat example.json
-    displayName: "Show example.json"
+      - script: cat example.json
+        displayName: "Show example.json"
+
+  - job: variablegroup
+    variables:
+      - group: FileTransform Example
+
+    steps:
+      - task: FileTransform@1
+        inputs:
+          folderPath: "$(System.DefaultWorkingDirectory)"
+          fileType: "json"
+          targetFiles: "example.json"
+
+      - script: cat example.json
+        displayName: "Show example.json"
